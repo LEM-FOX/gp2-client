@@ -33,7 +33,7 @@ export default {
   methods: {
     count () {
       this.check += 1
-      this.$socket.emit('newCounter', { score: this.check })
+      this.$socket.emit('newCounter', { scoreLawan: this.scoreLawan, score: this.check })
     }
   }
 }
