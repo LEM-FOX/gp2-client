@@ -18,7 +18,10 @@ export default {
   },
   methods: {
     inputUserName () {
-      console.log(this.userName)
+      // console.log(this.userName)
+      localStorage.setItem('username', this.userName)
+      this.$socket.emit('terserahlulah', this.userName)
+      this.$router.push('/game')
     }
   }
 }
