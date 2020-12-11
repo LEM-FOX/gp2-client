@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row" style="min-height: 100vh;">
+        <div class="col-md-5 d-none d-sm-block">
+          <div class="d-flex align-items-center" style="height: 100%;">
+            <div class="rounded p-2">
+              <h1
+                class="text-center mt-4 text-uppercase text-muted"
+                style="z-index: 2; position: relative;"
+              >
+                Rooms
+              </h1>
+              <img
+                src="https://842930.smushcdn.com/1760858/wp-content/uploads/2020/03/stubborn-05-service.png"
+                alt="rooms"
+                class="img-fluid"
+                style="margin-top: -35px;"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7">
+          <h1>Room Page</h1>
+          <form @submit.prevent="makingRoom">
+            <input type="text" v-model="roomName" />
+            <button type="submit">Create Room</button>
+          </form>
+          <div class="text-center">
+            <div class="justify-content-center d-flex">
+              <lottie-player
+                src="https://assets1.lottiefiles.com/temp/lf20_LJK4oD.json"
+                background="transparent"
+                speed="1"
+                loop=""
+                autoplay=""
+                style="width: 300px; height: 300px;"
+              ></lottie-player>
+            </div>
+            <div class="room-down">
+              <div class="card" v-for="(room,i) in getRoom" :key="i">
+                <div class="card-body">
+                  <h5 class="card-title">{{room.name}}</h5>
+                  <a
+                    href="#"
+                    class="btn btn-primary"
+                    @click="joinRoom(room.name)"
+                    >Join</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div></div>
+    </div>
+  </body>
+</html>
