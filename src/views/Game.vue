@@ -56,7 +56,9 @@
         </div>
         <div class='columns is-three-quarters'>
           <!-- layar buat diteken -->
-          <div class='container'></div>
+          <div class='target-page'>
+            <target></target>
+          </div>
         </div>
       </div>
     </div>
@@ -65,8 +67,12 @@
 </template>
 
 <script>
+import target from '../components/Target'
 export default {
   name: 'Game',
+  components: {
+    target
+  },
   data () {
     return {
       counters: [],
@@ -89,3 +95,10 @@ export default {
   }
 }
 </script>
+<style>
+.target-page {
+  background-color: brown;
+  width: 100%;
+  height: 100%;
+}
+</style>
