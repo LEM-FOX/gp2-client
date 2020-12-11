@@ -72,7 +72,8 @@ export default {
       counters: [],
       check: 0,
       scoreLawan: 0,
-      Username: ''
+      Username: '',
+      score: 0
     }
   },
   sockets: {
@@ -96,8 +97,11 @@ export default {
         score: this.check
       })
     }
+  },
+  computed: {
+    getPlayerData () {
+      return this.$store.state.playerData
   }
-}
 </script>
 
 <style scoped>

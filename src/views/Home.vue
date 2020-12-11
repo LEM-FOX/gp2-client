@@ -39,15 +39,19 @@ export default {
   name: 'Home',
   data () {
     return {
-      userName: ''
+      userName: '',
+      score: 0
     }
   },
   methods: {
     inputUserName () {
-      // console.log(this.userName)
+      const payload = {
+        name: this.userName,
+        score: this.score
+      }
       localStorage.setItem('username', this.userName)
-      this.$socket.emit('terserahlulah', this.userName)
-      this.$router.push('/game')
+      this.$socket.emit('playerRegistration', payload)
+      this.$router.push('/room')
     }
   }
 }
