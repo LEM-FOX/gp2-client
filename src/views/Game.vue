@@ -101,7 +101,9 @@ export default {
   computed: {
     getPlayerData () {
       return this.$store.state.playerData
+    }
   }
+}
 </script>
 
 <style scoped>
