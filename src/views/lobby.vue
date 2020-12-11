@@ -1,13 +1,14 @@
 <template>
 <div>
   <h1>watiting room {{getRoomDetail.name}}</h1>
-  <button @click="start">start</button>
+  <button v-if="username == adminName " @click="start">start</button>
   <div class="card" v-for="(user,i) in getRoomDetail.users" :key="i">
     <div class="card-body">
      <h5 class="card-title">{{user}}</h5>
     </div>
   </div>
 </div>
+
 </template>
 
 <script>
@@ -16,13 +17,14 @@ export default {
   data () {
     return {
       adminName: '',
-      room: {}
+      room: {},
+      username: localStorage.username
     }
   },
   methods: {
     start () {
       this.$socket.emit('startGame', this.getRoomDetail.name)
-      this.$router.push('/game')
+      // this.$router.push('/game')
     }
   },
   computed: {
@@ -31,9 +33,7 @@ export default {
     }
   },
   created () {
-    this.$socket.on('startGame', () => {
-      this.$router.push('/play')
-    })
+    this.adminName = this.getRoomDetail.admin
   }
 }
 </script>

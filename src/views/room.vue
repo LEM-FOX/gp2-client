@@ -81,7 +81,6 @@ export default {
         username: localStorage.username
       }
       this.$socket.emit('joinRoom', payload)
-      this.$router.push('/lobby')
     }
   },
   computed: {
