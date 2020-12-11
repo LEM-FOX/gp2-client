@@ -1,20 +1,60 @@
 <template>
-  <div>
-      <div class="room-top">
-        <h1>Room Page</h1>
-        <form @submit.prevent="makingRoom">
-            <input type="text" v-model="roomName" >
-            <button type="submit">Create Room</button>
-        </form>
+  <div class="container">
+    <div class="row" style="min-height: 100vh;">
+      <div class="col-md-5 d-none d-sm-block">
+        <div class="d-flex align-items-center" style="height: 100%;">
+          <div class="rounded p-2">
+            <label for="waiting-rooms mb-4">ＷＡＩＴＩＮＧ ＲＯＯＭ</label>
+            <h1
+              class="text-center mt-5 text-uppercase text-muted"
+              style="z-index: 2; position: relative;"
+            >
+            </h1>
+            <img
+              src="https://cdn.dribbble.com/users/851368/screenshots/2091986/ghostbusters_dribble_gif.gif"
+              alt="rooms"
+              class="img-fluid"
+              style="margin-top: -35px;"
+            />
+          </div>
+        </div>
       </div>
-      <div class="room-down">
-          <div class="card" v-for="(room,i) in getRoom" :key="i">
-            <div class="card-body">
+      <div class="col-md-7">
+        <strong>Create room!</strong>
+        <div class="row justify-content-center">
+          <form @submit.prevent="makingRoom">
+            <input type="text" v-model="roomName" /><br>
+            <button class="btn btn-primary btn-sm mt-2" type="submit">create!</button>
+          </form>
+        </div>
+        <div class="text-center">
+          <div class="justify-content-center d-flex">
+            <img
+              src="https://cdn.dribbble.com/users/1785190/screenshots/3906047/search.gif"
+              background="transparent"
+              speed="1"
+              loop=""
+              autoplay=""
+              z-index=0
+              style="width: 300px;"
+            >
+          </div>
+          <div class="room-down">
+            <div class="card" v-for="(room,i) in getRoom" :key="i">
+              <div class="card-body">
                 <h5 class="card-title">{{room.name}}</h5>
-                <a href="#" class="btn btn-primary" @click="joinRoom(room.name)">Join</a>
+                <a
+                  href="#"
+                  class="btn btn-primary"
+                  @click="joinRoom(room.name)"
+                  >Join</a
+                >
+              </div>
             </div>
           </div>
+        </div>
       </div>
+    </div>
   </div>
 </template>
 

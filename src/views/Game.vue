@@ -25,14 +25,14 @@
                 </div>
                 <div class='media-content'>
                   <small>player name:</small>
-                  <p class='title is-8'>{{ Username }}</p>
+                  <p class='title is-8'>{{ players[0] }}</p>
                   <small>score:</small>
                   <p class='subtitle is-6'>{{ check }}</p>
                 </div>
               </div>
             </div>
           </div>
-          <button class="button" @click='count'>Push Button</button>
+          <!-- <button class="button" @click='count'>Push Button</button> -->
           <br>
           <!-- card lawan -->
           <!-- card -->
@@ -46,9 +46,9 @@
                 </div>
                 <div class='media-content'>
                   <small>player name:</small>
-                  <p class='title is-8'> Enemy </p>
+                  <p class='title is-8'>{{ players[1] }}</p>
                   <small>score:</small>
-                  <p class='subtitle is-6'>{{ scoreLawan }}</p>
+                  <p class='subtitle is-6'>{{ scoreLawan }} </p>
                 </div>
               </div>
             </div>
@@ -56,8 +56,8 @@
         </div>
         <div class='columns is-three-quarters'>
           <!-- layar buat diteken -->
-          <div class='target-page'>
-            <target></target>
+          <div class='container'>
+            <target @click="count"></target>
           </div>
         </div>
       </div>
@@ -79,26 +79,53 @@ export default {
       check: 0,
       scoreLawan: 0,
       Username: '',
-      score: 0
+      score: 0,
+      players: []
+    }
+  },
+  sockets: {
+    countClick (payload) {
+      this.counters = payload
+      this.Username = payload.name // ini array
+    },
+    scoreLawan (payload) {
+      //   console.log(payload)
+      this.scoreLawan = payload
+    },
+    username (payload) {
+      this.Username = payload
+    },
+    collectionPlayer (payload) {
+      this.players = payload
+      // console.log(payload)
+    }
+  },
+  methods: {
+    count () {
+      this.check += 1
+      this.$socket.emit('newCounter', {
+        scoreLawan: this.scoreLawan,
+        score: this.check
+      })
+    },
+    player () {
+      return this.players
     }
   },
   computed: {
     getPlayerData () {
       return this.$store.state.playerData
     }
-  },
-  methods: {
-    count () {
-      this.check += 1
-      this.$socket.emit('newCounter', { scoreLawan: this.scoreLawan, score: this.check })
-    }
   }
+  // created: {
+  //   collectionPlayer()
+  // }
 }
 </script>
-<style>
-.target-page {
-  background-color: brown;
-  width: 100%;
-  height: 100%;
+
+<style scoped>
+img {
+  width: 300px;
+  height: 300px;
 }
 </style>
