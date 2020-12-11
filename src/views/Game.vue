@@ -32,7 +32,7 @@
               </div>
             </div>
           </div>
-          <!-- <button class="button" @click='count'>Push Button</button> -->
+          <button class="button" @click='count'>Push Button</button>
           <br>
           <!-- card lawan -->
           <!-- card -->
@@ -57,7 +57,7 @@
         <div class='columns is-three-quarters'>
           <!-- layar buat diteken -->
           <div class='container'>
-            <target @click="count"></target>
+            <target @newScore="newScore" :check="check" :scoreLawan="scoreLawan"></target>
           </div>
         </div>
       </div>
@@ -80,7 +80,15 @@ export default {
       scoreLawan: 0,
       Username: '',
       score: 0,
-      players: []
+      players: [],
+      targetStatus: true,
+      targetStyle: {
+        position: 'relative',
+        width: '20%',
+        height: '20%',
+        top: '100%',
+        left: '100%'
+      }
     }
   },
   sockets: {
@@ -89,7 +97,6 @@ export default {
       this.Username = payload.name // ini array
     },
     scoreLawan (payload) {
-      //   console.log(payload)
       this.scoreLawan = payload
     },
     username (payload) {
@@ -98,18 +105,33 @@ export default {
     collectionPlayer (payload) {
       this.players = payload
       // console.log(payload)
+    },
+    gameOver (payload) {
+      console.log(payload)
     }
   },
   methods: {
     count () {
       this.check += 1
+      this.targetStatus = false
+      // setInterval(this.changeTargetStatus, 2000)
+      // this.targetStyle.left = Math.floor(Math.random() * 100).toString() + '%'
+      // this.targetStyle.top = Math.floor(Math.random() * 100).toString() + '%'
       this.$socket.emit('newCounter', {
         scoreLawan: this.scoreLawan,
         score: this.check
       })
     },
+    // changeTargetStatus () {
+    //   this.targetStatus = true
+    //   // this.targetStyle.left = Math.floor(Math.random() * 100).toString() + '%'
+    //   // this.targetStyle.top = Math.floor(Math.random() * 100).toString() + '%'
+    // },
     player () {
       return this.players
+    },
+    newScore (payload) {
+      this.check = payload
     }
   },
   computed: {
