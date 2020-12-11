@@ -18,7 +18,7 @@
               <h1 class="text-center" style="z-index: 2; position: relative;">
                 <b>GHOST HUNT!</b>
               </h1>
-              <h3 class="text-center">Login</h3>
+              <h3 class="text-center">lets hunt!</h3>
               <div class="p-4">
                 <form @submit.prevent="inputUserName">
                   <small>username</small><br />

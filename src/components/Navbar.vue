@@ -1,7 +1,8 @@
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item">
+        <i class="fas fa-caret-up"></i>
+      <a class="navbar-item" href="/">
         <img src="https://i.gifer.com/1AWw.gif">
       </a>
     </div>
