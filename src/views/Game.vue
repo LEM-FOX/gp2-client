@@ -57,7 +57,7 @@
         <div class='columns is-three-quarters'>
           <!-- layar buat diteken -->
           <div class='container'>
-            <target @click="count"></target>
+            <target :players="players" @newScore="newScore" :check="check" :scoreLawan="scoreLawan"></target>
           </div>
         </div>
       </div>
@@ -68,6 +68,7 @@
 
 <script>
 import target from '../components/Target'
+import Swal from 'sweetalert2'
 export default {
   name: 'Game',
   components: {
@@ -80,7 +81,15 @@ export default {
       scoreLawan: 0,
       Username: '',
       score: 0,
-      players: []
+      players: [],
+      targetStatus: true,
+      targetStyle: {
+        position: 'relative',
+        width: '20%',
+        height: '20%',
+        top: '100%',
+        left: '100%'
+      }
     }
   },
   sockets: {
@@ -89,27 +98,35 @@ export default {
       this.Username = payload.name // ini array
     },
     scoreLawan (payload) {
-      //   console.log(payload)
       this.scoreLawan = payload
     },
     username (payload) {
       this.Username = payload
     },
     collectionPlayer (payload) {
+      console.log(payload)
       this.players = payload
-      // console.log(payload)
+    },
+    gameOver (payload) {
+      Swal.fire(payload)
+      this.$router.push('/room')
     }
   },
   methods: {
     count () {
       this.check += 1
+      this.targetStatus = false
       this.$socket.emit('newCounter', {
+        roomName: this.getRoomDetail.name,
         scoreLawan: this.scoreLawan,
         score: this.check
       })
     },
     player () {
       return this.players
+    },
+    newScore (payload) {
+      this.check = payload
     }
   },
   computed: {
@@ -117,9 +134,6 @@ export default {
       return this.$store.state.playerData
     }
   }
-  // created: {
-  //   collectionPlayer()
-  // }
 }
 </script>
 
