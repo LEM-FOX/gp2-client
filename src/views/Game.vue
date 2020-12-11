@@ -76,16 +76,37 @@ export default {
       score: 0
     }
   },
-  computed: {
-    getPlayerData () {
-      return this.$store.state.playerData
+  sockets: {
+    countClick (payload) {
+      this.counters = payload
+      this.Username = payload.name // ini array
+    },
+    scoreLawan (payload) {
+      //   console.log(payload)
+      this.scoreLawan = payload
+    },
+    username (payload) {
+      this.Username = payload
     }
   },
   methods: {
     count () {
       this.check += 1
-      this.$socket.emit('newCounter', { scoreLawan: this.scoreLawan, score: this.check })
+      this.$socket.emit('newCounter', {
+        scoreLawan: this.scoreLawan,
+        score: this.check
+      })
     }
+  },
+  computed: {
+    getPlayerData () {
+      return this.$store.state.playerData
   }
-}
 </script>
+
+<style scoped>
+img {
+  width: 300px;
+  height: 300px;
+}
+</style>
