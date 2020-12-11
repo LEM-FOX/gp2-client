@@ -25,7 +25,7 @@
                 </div>
                 <div class='media-content'>
                   <small>player name:</small>
-                  <p class='title is-8'>{{ Username }}</p>
+                  <p class='title is-8'>{{ players[0] }}</p>
                   <small>score:</small>
                   <p class='subtitle is-6'>{{ check }}</p>
                 </div>
@@ -46,9 +46,9 @@
                 </div>
                 <div class='media-content'>
                   <small>player name:</small>
-                  <p class='title is-8'> Enemy </p>
+                  <p class='title is-8'>{{ players[1] }}</p>
                   <small>score:</small>
-                  <p class='subtitle is-6'>{{ scoreLawan }}</p>
+                  <p class='subtitle is-6'>{{ scoreLawan }} </p>
                 </div>
               </div>
             </div>
@@ -73,7 +73,8 @@ export default {
       check: 0,
       scoreLawan: 0,
       Username: '',
-      score: 0
+      score: 0,
+      players: []
     }
   },
   sockets: {
@@ -87,6 +88,10 @@ export default {
     },
     username (payload) {
       this.Username = payload
+    },
+    collectionPlayer (payload) {
+      this.players = payload
+      // console.log(payload)
     }
   },
   methods: {
@@ -96,12 +101,20 @@ export default {
         scoreLawan: this.scoreLawan,
         score: this.check
       })
+    },
+    player () {
+      return this.players
     }
   },
   computed: {
     getPlayerData () {
       return this.$store.state.playerData
+    }
   }
+  // created: {
+  //   collectionPlayer()
+  // }
+}
 </script>
 
 <style scoped>
